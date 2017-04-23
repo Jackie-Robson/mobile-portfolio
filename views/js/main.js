@@ -465,7 +465,7 @@ var resizePizzas = function(size) {
 
     var pizzaSizes = document.querySelectorAll(".randomPizzaContainer");
     for (var i = 0; i < pizzaSizes.length; i++) {
-      pizzaSizes[i].style.width = newWidth +"%ß"
+      pizzaSizes[i].style.width = newWidth +"%"
     }
   }
 
