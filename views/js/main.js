@@ -441,50 +441,25 @@ var resizePizzas = function(size) {
 
     changeSliderLabel(size);
 
-    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
-    function determineDx(elem, size) {
-        var oldWidth = elem.offsetWidth;
-        var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
-        var oldSize = oldWidth / windowWidth;
-
-        // Changes the slider value to a percent width
-        function sizeSwitcher(size) {
-            switch (size) {
-                case "1":
-                    return 0.25;
-                case "2":
-                    return 0.3333;
-                case "3":
-                    return 0.5;
-                default:
-                    console.log("bug in sizeSwitcher");
-            }
-        }
-
-        var newSize = sizeSwitcher(size);
-        var dx = (newSize - oldSize) * windowWidth;
-
-        return dx;
-    }
 
     // Iterates through pizza elements on the page and changes their widths
     function changePizzaSizes(size) {
         switch (size) {
             case "1":
-                newWidth = 25;
+                newWidth = "25%";
                 break;
             case "2":
-                newWidth = 33.3;
+                newWidth = "33.3%";
                 break;
             case "3":
-                newWidth = 50;
+                newWidth = "50%";
                 break;
             default:
                 console.log("switch bug, fix it!");
         }
         var pizzaSizes = document.querySelectorAll(".randomPizzaContainer");
         for (var i = 0; i < pizzaSizes.length; i++) {
-            pizzaSizes[i].style.width = newWidth + "%";
+            pizzaSizes[i].style.width = newWidth;
         }
     }
 
@@ -554,10 +529,12 @@ window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
-    var cols = 4;
+    var cols = 8;
     var s = 248;
+    var pizzaRows = screen.height / s;
+    var pizzasOnScreen =  pizzaRows * cols;
 
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < pizzasOnScreen; i++) {
         var elem = document.createElement('img');
         elem.className = 'mover';
         elem.src = "images/pizza.png";
